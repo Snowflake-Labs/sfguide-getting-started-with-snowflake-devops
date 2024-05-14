@@ -1,0 +1,12 @@
+// For format details, see https://aka.ms/devcontainer.json.
+{
+    "name": "Snowflake Demo Codespace",
+    // Configure tool-specific properties.
+    "customizations": {
+      "vscode": {
+        "extensions": [
+          "snowflake.snowflake-vsc"
+        ]
+      }
+    }
+  }

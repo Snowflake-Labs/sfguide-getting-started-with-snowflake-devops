@@ -1,0 +1,3 @@
+[connections.default]
+warehouse = "QUICKSTART_WH"
+role = "ACCOUNTADMIN"
