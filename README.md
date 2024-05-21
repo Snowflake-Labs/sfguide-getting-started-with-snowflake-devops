@@ -12,4 +12,4 @@ By the end of the session, you will have learned everything you need to get star
 
 ## Step-By-Step Guide
 
-For prerequisites, environment setup, step-by-step guide and instructions, please refer to the [QuickStart Guide](TODO).
+For prerequisites, environment setup, step-by-step guide and instructions, please refer to the QuickStart Guide.
