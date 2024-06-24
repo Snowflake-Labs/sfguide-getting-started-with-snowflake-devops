@@ -13,7 +13,7 @@ create or alter table vacation_spots (
   , aquarium_cnt int
   , zoo_cnt int
   , korean_restaurant_cnt int
-) data_retention_time_in_days = {{retention_time}};
+) data_retention_time_in_days = 1;
 
 -- task to merge pipeline results into target table
 create or alter task vacation_spots_update

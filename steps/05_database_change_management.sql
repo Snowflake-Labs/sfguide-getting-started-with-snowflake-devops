@@ -56,4 +56,4 @@ use role accountadmin;
 -- Fetch changes from GitHub
 alter git repository quickstart_common.public.quickstart_repo fetch;
 -- Deploy the updated data pipeline
-execute immediate from @quickstart_common.public.quickstart_repo/branches/dev/deploy_pipeline.sql;
+execute immediate from @quickstart_common.public.quickstart_repo/branches/main/deploy_pipeline.sql;
