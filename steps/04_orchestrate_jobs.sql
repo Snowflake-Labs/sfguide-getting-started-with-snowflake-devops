@@ -16,7 +16,7 @@ create or alter table vacation_spots (
 , zoo_cnt int
 , korean_restaurant_cnt int
   -- STEP 5: INSERT CHANGES HERE
-) data_retention_time_in_days = 1;
+) use schema quickstart_{{environment}}.gold;
 
 
 -- task to merge pipeline results into target table
