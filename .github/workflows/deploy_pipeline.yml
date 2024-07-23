@@ -4,8 +4,9 @@ name: Deploy data pipeline
 on:
   push:
     branches:
-      - dev
+      - devlopment
       - main
+ 
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
