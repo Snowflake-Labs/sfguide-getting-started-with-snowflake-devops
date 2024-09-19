@@ -78,9 +78,9 @@ create or replace view weather_forecast as select postal_code, avg(avg_temperatu
 -- We use the data provided by Cybersyn to limit our pipeline to 
 -- US cities with atleast 100k residents to enjoy all the benefits a big city provides during our vacation.
 create or replace view major_us_cities as select geo.geo_id, geo.geo_name, max(ts.value) total_population
-  from government_essentials.cybersyn.datacommons_timeseries ts
-  join government_essentials.cybersyn.geography_index geo on ts.geo_id = geo.geo_id
-  join government_essentials.cybersyn.geography_relationships geo_rel on geo_rel.related_geo_id = geo.geo_id
+  from global_government.cybersyn.datacommons_timeseries ts
+  join global_government.cybersyn.geography_index geo on ts.geo_id = geo.geo_id
+  join global_government.cybersyn.geography_relationships geo_rel on geo_rel.related_geo_id = geo.geo_id
   where true
     and ts.variable_name = 'Total Population, census.gov'
     and date >= '2020-01-01'
@@ -92,8 +92,8 @@ create or replace view major_us_cities as select geo.geo_id, geo.geo_name, max(t
 
 -- Using the geography relationships provided by Cybersyn we collect all the zip codes belonging to a city.
 create or replace view zip_codes_in_city as select city.geo_id city_geo_id, city.geo_name city_geo_name, city.related_geo_id zip_geo_id, city.related_geo_name zip_geo_name
-  from us_points_of_interest__addresses.cybersyn.geography_relationships country
-  join us_points_of_interest__addresses.cybersyn.geography_relationships city on country.related_geo_id = city.geo_id
+  from us_addresses__poi.cybersyn.geography_relationships country
+  join us_addresses__poi.cybersyn.geography_relationships city on country.related_geo_id = city.geo_id
   where true
     and country.geo_id = 'country/USA'
     and city.level = 'City'

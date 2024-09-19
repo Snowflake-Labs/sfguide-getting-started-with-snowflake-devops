@@ -69,7 +69,7 @@ create or alter task email_notification
       if (:options = '[]') then
         CALL SYSTEM$SEND_EMAIL(
             'email_integration',
-            '<insert your email here>', -- INSERT YOUR EMAIL HERE
+            'eddaouissam@gmail.com', -- INSERT YOUR EMAIL HERE
             'New data successfully processed: No suitable vacation spots found.',
             'The query did not return any results. Consider adjusting your filters.');
       end if;
@@ -78,18 +78,18 @@ create or alter task email_notification
       Explain your choise, offer a short description of the location and provide tips on what to pack for the vacation considering the weather conditions? 
       Finally, could you provide a detailed plan of daily activities for a one week long vacation covering the highlights of the chosen destination?\n\n';
       
-      let response varchar := (SELECT SNOWFLAKE.CORTEX.COMPLETE('mistral-7b', :query || :options));
+      let response varchar := (SELECT SNOWFLAKE.CORTEX.COMPLETE('embed_text_768', :query || :options));
 
       CALL SYSTEM$SEND_EMAIL(
         'email_integration',
-        '<insert your email here>', -- INSERT YOUR EMAIL HERE
+        'eddaouissam@gmail.com', -- INSERT YOUR EMAIL HERE
         'New data successfully processed: The perfect place for your summer vacation has been found.',
         :response);
     exception
         when EXPRESSION_ERROR then
             CALL SYSTEM$SEND_EMAIL(
             'email_integration',
-            '<insert your email here>', -- INSERT YOUR EMAIL HERE
+            'eddaouissam@gmail.com', -- INSERT YOUR EMAIL HERE
             'New data successfully processed: Cortex LLM function inaccessible.',
             'It appears that the Cortex LLM functions are not available in your region');
     end;
