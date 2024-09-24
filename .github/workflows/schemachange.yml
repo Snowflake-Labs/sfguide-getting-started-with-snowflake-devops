@@ -19,7 +19,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repository
         uses: actions/checkout@v2
-
+      - run: echo " workspace print $GITHUB_WORKSPACE"
       - name: Use Python 3.8.x
         uses: actions/setup-python@v2.2.1
         with:
