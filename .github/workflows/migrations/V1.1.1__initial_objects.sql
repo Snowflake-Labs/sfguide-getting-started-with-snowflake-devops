@@ -1,3 +1,4 @@
+use database demo_db;
 CREATE SCHEMA DEMO;
 CREATE TABLE HELLO_WORLD
 (
