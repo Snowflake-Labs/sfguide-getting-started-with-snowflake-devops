@@ -1,10 +1,10 @@
-name: schemalchange
+name: snowflake-devops-Schemachange
 
 # Controls when the action will run. 
 on:
   push:
     branches:
-      - Dev
+      - main
     paths:
       - 'migrations/**'
 
@@ -19,7 +19,7 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+
       - name: Use Python 3.8.x
         uses: actions/setup-python@v2.2.1
         with:
@@ -27,16 +27,17 @@ jobs:
 
       - name: Run schemachange
         env:
-          SF_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-          SF_USERNAME: ${{ secrets.SNOWFLAKE_USERNAME }}
-          SF_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
-          SF_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
-          SF_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
-          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }
-          echo "PROJECT_FOLDER $(PROJECT_FOLDER)"
+          SF_ACCOUNT: ${{ secrets.SnowFlake_ACCOUNT }}
+          SF_USERNAME: ${{ secrets.SnowFlake_USERNAME }}
+          SF_ROLE: ${{ secrets.SnowFlake_ROLE }}
+          SF_WAREHOUSE: ${{ secrets.SnowFlake_WAREHOUSE }}
+          SF_DATABASE: ${{ secrets.SnowFlake_DATABASE }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SnowFlake_PASSWORD }}
+        run: |
+          echo "GITHUB_WORKSPACE: $GITHUB_WORKSPACE"
           python --version
           echo "Step 1: Installing schemachange"
           pip install schemachange
-         
+          
           echo "Step 2: Running schemachange"
-          schemachange -f $(PROJECT_FOLDER)/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY --create-change-history-table
+          schemachange -f $GITHUB_WORKSPACE/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY --create-change-history-table
