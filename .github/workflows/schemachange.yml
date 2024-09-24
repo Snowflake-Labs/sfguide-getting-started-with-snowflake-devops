@@ -4,7 +4,7 @@ name: schemalchange
 on:
   push:
     branches:
-      - main
+      - Dev
     paths:
       - 'migrations/**'
 
