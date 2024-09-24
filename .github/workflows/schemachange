@@ -1,36 +1,42 @@
-# This is a basic workflow to help you get started with Actions
+name: schemalchange
 
-name: CI
-
-# Controls when the workflow will run
+# Controls when the action will run. 
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - Dev
+    paths:
+      - 'migrations/**'
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  deploy-snowflake-changes-job:
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Use Python 3.8.x
+        uses: actions/setup-python@v2.2.1
+        with:
+          python-version: 3.8.x
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+      - name: Run schemachange
+        env:
+          SF_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
+          SF_USERNAME: ${{ secrets.SNOWFLAKE_USERNAME }}
+          SF_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
+          SF_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
+          SF_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
+          SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }
+          echo "PROJECT_FOLDER $(PROJECT_FOLDER)"
+          python --version
+          echo "Step 1: Installing schemachange"
+          pip install schemachange
+         
+          echo "Step 2: Running schemachange"
+          schemachange -f $(PROJECT_FOLDER)/migrations -a $SF_ACCOUNT -u $SF_USERNAME -r $SF_ROLE -w $SF_WAREHOUSE -d $SF_DATABASE -c $SF_DATABASE.SCHEMACHANGE.CHANGE_HISTORY --create-change-history-table
