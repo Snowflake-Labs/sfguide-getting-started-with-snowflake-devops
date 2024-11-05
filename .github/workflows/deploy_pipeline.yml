@@ -27,10 +27,11 @@ jobs:
         uses: actions/checkout@v4
 
       # Install Snowflake CLI GitHub Action and point to config file
-      - uses: Snowflake-Labs/snowflake-cli-action@v1
+      - name: Install snowflake-cli
+        uses: Snowflake-Labs/snowflake-cli-action@v1.5
         with:
           cli-version: "latest"
-          default-config-file-path: "config.toml"
+          default-config-file-path: ".snowflake/config.toml"
 
       # Update Snowflake's copy of the repository
       - name: Fetch repository changes
@@ -42,10 +43,10 @@ jobs:
           BRANCH_NAME=${{ github.ref_name }}
           if [ "${BRANCH_NAME}" == "main" ]; then
             RETENTION_TIME=1
-          elif [ "${BRANCH_NAME}" == "dev" ]; then
+          else
             RETENTION_TIME=0
           fi
           snow git execute \
-            "@${REPO_NAME}/branches/${BRANCH_NAME}/deploy_parametrized_pipeline.sql" \
+            "@${REPO_NAME}/branches/${BRANCH_NAME}/steps/0[134]_*" \
             -D "environment='${BRANCH_NAME}'" \
             -D "retention_time=${RETENTION_TIME}"

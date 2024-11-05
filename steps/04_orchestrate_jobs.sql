@@ -20,6 +20,7 @@ create or alter table vacation_spots (
 create or alter task vacation_spots_update
   schedule = '1440 minute'
   warehouse = 'quickstart_wh'
+  ERROR_ON_NONDETERMINISTIC_MERGE = false
   AS MERGE INTO vacation_spots USING (
     select *
     from silver.flights_from_home flight

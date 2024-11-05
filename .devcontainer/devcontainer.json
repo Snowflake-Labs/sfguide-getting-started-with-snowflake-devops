@@ -1,12 +1,24 @@
-// For format details, see https://aka.ms/devcontainer.json.
 {
-    "name": "Snowflake Demo Codespace",
-    // Configure tool-specific properties.
-    "customizations": {
-      "vscode": {
-        "extensions": [
-          "snowflake.snowflake-vsc"
-        ]
+  "name": "Snowflake Demo Codespace",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.11"
+    }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "snowflake.snowflake-vsc"
+      ],
+      "settings": {
+        "snowflake.snowsqlConfigPath": "${containerWorkspaceFolder}/.snowflake/config.toml"
       }
     }
+  },
+  "updateContentCommand": "bash .devcontainer/install-dependencies.sh",
+  "postCreateCommand": "chmod 0600 \"${containerWorkspaceFolder}/.snowflake/config.toml\"",
+  "containerEnv": {
+    "SNOWFLAKE_HOME": "${containerWorkspaceFolder}/.snowflake"
   }
+}
