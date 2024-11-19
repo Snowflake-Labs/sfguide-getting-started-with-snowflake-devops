@@ -231,22 +231,7 @@ pipeline = [
         group by city.geo_id, city.geo_name, city.total_population
         """,
     ),
-    # Placeholder: Add new view definition here
-]
-
-
-# entry point for PythonAPI
-root = Root(Session.builder.getOrCreate())
-
-# create views in Snowflake
-silver_schema = root.databases["quickstart_common"].schemas["silver"]
-silver_schema.user_defined_functions.create(
-    map_city_to_airport, mode=CreateMode.or_replace
-)
-for view in pipeline:
-    silver_schema.views.create(view, mode=CreateMode.or_replace)
-
-View(
+    View(
     name="attractions",
     columns=[
         ViewColumn(name="geo_id"),
@@ -274,3 +259,17 @@ View(
     group by city.geo_id, city.geo_name
     """,
 ),
+]
+
+
+# entry point for PythonAPI
+root = Root(Session.builder.getOrCreate())
+
+# create views in Snowflake
+silver_schema = root.databases["quickstart_common"].schemas["silver"]
+silver_schema.user_defined_functions.create(
+    map_city_to_airport, mode=CreateMode.or_replace
+)
+for view in pipeline:
+    silver_schema.views.create(view, mode=CreateMode.or_replace)
+
