@@ -1,7 +1,7 @@
 [connections.default]
-warehouse = "QUICKSTART_WH"
+warehouse = "COMPUTE_WH"
 role = "ACCOUNTADMIN"
-database = "QUICKSTART_COMMON"
+database = "GIT"
 schema = "PUBLIC"
 account = "<INSERT YOUR ACCOUNT IDENTIFIER>"
 user = "<INSERT YOUR USERNAME>"
