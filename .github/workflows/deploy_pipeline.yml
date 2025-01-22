@@ -41,4 +41,18 @@ jobs:
 
       # Update Snowflake's copy of the repository
       - name: Fetch repository changes
-        run: snow connection test
+        run: snow git fetch "${REPO_NAME}"
+
+      # Deploy pipeline with branch specific parameters
+      - name: Deploy data pipeline to ${{ github.ref_name }}
+        run: |
+          BRANCH_NAME=${{ github.ref_name }}
+          if [ "${BRANCH_NAME}" == "main" ]; then
+            RETENTION_TIME=1
+          else
+            RETENTION_TIME=0
+          fi
+          snow git execute \
+            "@${REPO_NAME}/branches/${BRANCH_NAME}/steps/0[134]_*" \
+            -D "environment='${BRANCH_NAME}'" \
+            -D "retention_time=${RETENTION_TIME}"
