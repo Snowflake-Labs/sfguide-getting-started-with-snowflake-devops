@@ -41,7 +41,7 @@ View(
 
 
 -- Add the "attractions" view to the JOIN clause of the "vacation_spots_update" task in steps/04_orchestrate_jobs.sql
-join silver.attractions att on att.geo_name = city.geo_name
+join silver.attractions att on att.geo_id = city.geo_id
 
 
 -- Append the following updates to the WHEN MATCHED clause of the "vacation_spots_update" task in steps/04_orchestrate_jobs.sql
