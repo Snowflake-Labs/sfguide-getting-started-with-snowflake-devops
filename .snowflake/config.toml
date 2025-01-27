@@ -1,8 +1,8 @@
 [connections.default]
-warehouse = "QUICKSTART_WH"
+warehouse = "COMPUTE_WH"
 role = "ACCOUNTADMIN"
 database = "QUICKSTART_COMMON"
 schema = "PUBLIC"
-account = "<INSERT YOUR ACCOUNT IDENTIFIER>"
-user = "<INSERT YOUR USERNAME>"
-password = "<INSERT YOUR PASSWORD>"
+account = "GWNKTAH-TF62777"
+user = "nisar"
+password = "B0lt0n198#?"
