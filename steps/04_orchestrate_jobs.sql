@@ -1,5 +1,5 @@
 use role accountadmin;
-use schema use schema quickstart_{{environment}}.gold;
+use schema quickstart_{{environment}}.gold;
 
 
 -- declarative target table of pipeline
