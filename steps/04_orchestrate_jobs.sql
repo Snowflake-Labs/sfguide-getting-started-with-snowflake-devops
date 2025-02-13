@@ -15,6 +15,7 @@ create or alter table vacation_spots (
   , aquarium_cnt int
   , zoo_cnt int
   , korean_restaurant_cnt int
+  , new_column string
 ) data_retention_time_in_days = {{retention_time}};
 
 
