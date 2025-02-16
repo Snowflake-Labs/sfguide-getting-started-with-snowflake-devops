@@ -17,11 +17,11 @@ jobs:
     env:
       REPO_NAME: "quickstart_common.public.quickstart_repo"
       SNOWFLAKE_CONNECTIONS_DEFAULT_AUTHENTICATOR: "SNOWFLAKE_JWT"
+      PRIVATE_KEY_PASSPHRASE: ${{ secrets.PASSPHARSE }}
       SNOWFLAKE_CONNECTIONS_DEFAULT_PRIVATE_KEY_FILE: ".snowflake/snowflake_rsa_key"
       # Read connection secrets
       SNOWFLAKE_CONNECTIONS_DEFAULT_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-      SNOWFLAKE_CONNECTIONS_DEFAULT_USER: ${{ secrets.SNOWFLAKE_USER }}
-      PRIVATE_KEY_PASSPHRASE: ${{ secrets.PASSPHARSE }}
+      SNOWFLAKE_CONNECTIONS_DEFAULT_USER: ${{ secrets.SNOWFLAKE_USER }}      
 
     steps:
       # Checkout step is necessary if you want to use a config file from your repo
