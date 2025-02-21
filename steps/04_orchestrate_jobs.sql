@@ -8,7 +8,8 @@ create or alter table vacation_spots (
   , airport varchar
   , co2_emissions_kg_per_person float
   , punctual_pct float
-  , avg_temperature_air_f float
+  , avg_temperature_air_f float 
+  , new_column3 string
   , avg_relative_humidity_pct float
   , avg_cloud_cover_pct float
   , precipitation_probability_pct float
@@ -17,6 +18,7 @@ create or alter table vacation_spots (
   , korean_restaurant_cnt int
   , new_column string
   , new_column2 string
+  , new_column3 string
 ) data_retention_time_in_days = {{retention_time}};
 
 
@@ -46,6 +48,7 @@ create or alter task vacation_spots_update
       , vacation_spots.korean_restaurant_cnt = harmonized_vacation_spots.korean_restaurant_cnt
       , vacation_spots.new_column = '{{environment}}'
       , vacation_spots.new_column2 = '{{environment}}'
+      , vacation_spots.new_column3 = '{{environment}}'
   WHEN NOT MATCHED THEN 
     INSERT VALUES (
         harmonized_vacation_spots.arrival_city
@@ -62,6 +65,7 @@ create or alter task vacation_spots_update
       , harmonized_vacation_spots.korean_restaurant_cnt
       , '{{environment}}'
       , '{{environment}}'
+      ,'{{environment}}'
     );
 
 
