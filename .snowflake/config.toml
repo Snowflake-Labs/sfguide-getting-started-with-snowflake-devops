@@ -1,6 +1,5 @@
 [connections.default]
+account = "wohmnnl-docpractice"
+user = "nidhyananthams"
+role = "sysadmin"
 warehouse = "DOC_PRACTICE_WH"
-role = "SYSADMIN"
-database = "FT"
-schema = "DEVOPS"
-account = "WOHMNNL-DOCPRACTICE.snowflakecomputing.com"
