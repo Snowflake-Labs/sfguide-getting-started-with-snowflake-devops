@@ -1,5 +1,5 @@
 [connections.default]
 account = "wohmnnl-docpractice"
 user = "nidhyananthams"
-role = "sysadmin"
+role = "accountadmin"
 warehouse = "DOC_PRACTICE_WH"
