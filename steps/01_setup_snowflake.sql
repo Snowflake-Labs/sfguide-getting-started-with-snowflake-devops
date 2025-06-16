@@ -16,6 +16,7 @@ CREATE OR REPLACE API INTEGRATION git_api_integration
   API_ALLOWED_PREFIXES = ('https://github.com/s-nithi') -- INSERT YOUR GITHUB USERNAME HERE
   ENABLED = TRUE;
 
+select current_timestamp();
 
 -- Git repository object is similar to external stage
 CREATE OR REPLACE GIT REPOSITORY quickstart_common.public.quickstart_repo
