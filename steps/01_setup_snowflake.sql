@@ -13,14 +13,14 @@ CREATE OR ALTER DATABASE QUICKSTART_{{environment}};
 -- API integration is needed for GitHub integration
 CREATE OR REPLACE API INTEGRATION git_api_integration
   API_PROVIDER = git_https_api
-  API_ALLOWED_PREFIXES = ('https://github.com/tmbothe/sfguide-getting-started-with-snowflake-devops.git') -- INSERT YOUR GITHUB USERNAME HERE
+  API_ALLOWED_PREFIXES = ('https://github.com/tmbothe') -- INSERT YOUR GITHUB USERNAME HERE
   ENABLED = TRUE;
 
 
 -- Git repository object is similar to external stage
 CREATE OR REPLACE GIT REPOSITORY quickstart_common.public.quickstart_repo
   API_INTEGRATION = git_api_integration
-  ORIGIN = 'https://github.com/tmbothe/sfguide-getting-started-with-snowflake-devops.git'; -- INSERT URL OF FORKED REPO HERE
+  ORIGIN = 'https://github.com/tmbothe/sfguide-getting-started-with-snowflake-devops'; -- INSERT URL OF FORKED REPO HERE
 
 
 CREATE OR ALTER DATABASE QUICKSTART_PROD;
