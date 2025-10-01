@@ -150,7 +150,7 @@ pipeline = [
         group by postal_code
         """,
     ),
-    # We use the data provided by Cybersyn to limit our pipeline to US cities with atleast
+    # We use the data provided by Snowflake Public Data to limit our pipeline to US cities with atleast
     # 100k residents to enjoy all the benefits a big city provides during our vacation.
     View(
         name="major_us_cities",
@@ -164,10 +164,10 @@ pipeline = [
             geo.geo_id, 
             geo.geo_name, 
             max(ts.value) total_population
-        from global_government.cybersyn.datacommons_timeseries ts
-        join global_government.cybersyn.geography_index geo 
+        from SNOWFLAKE_PUBLIC_DATA_FREE.PUBLIC_DATA_FREE.DATACOMMONS_TIMESERIES ts
+        join SNOWFLAKE_PUBLIC_DATA_FREE.PUBLIC_DATA_FREE.GEOGRAPHY_INDEX geo 
             on ts.geo_id = geo.geo_id
-        join global_government.cybersyn.geography_relationships geo_rel 
+        join SNOWFLAKE_PUBLIC_DATA_FREE.PUBLIC_DATA_FREE.GEOGRAPHY_RELATIONSHIPS geo_rel 
             on geo_rel.related_geo_id = geo.geo_id
         where true
             and ts.variable_name = 'Total Population, census.gov'
@@ -179,7 +179,7 @@ pipeline = [
         order by total_population desc
         """,
     ),
-    # Using the geography relationships provided by Cybersyn we collect all the
+    # Using the geography relationships provided by Snowflake Public Data we collect all the
     # zip codes belonging to a city.
     View(
         name="zip_codes_in_city",
@@ -195,8 +195,8 @@ pipeline = [
             city.geo_name city_geo_name, 
             city.related_geo_id zip_geo_id, 
             city.related_geo_name zip_geo_name
-        from us_addresses__poi.cybersyn.geography_relationships country
-        join us_addresses__poi.cybersyn.geography_relationships city 
+        from SNOWFLAKE_PUBLIC_DATA_FREE.PUBLIC_DATA_FREE.GEOGRAPHY_RELATIONSHIPS country
+        join SNOWFLAKE_PUBLIC_DATA_FREE.PUBLIC_DATA_FREE.GEOGRAPHY_RELATIONSHIPS city 
             on country.related_geo_id = city.geo_id
         where true
             and country.geo_id = 'country/USA'
