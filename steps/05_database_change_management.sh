@@ -20,10 +20,10 @@ View(
         count(case when category_main = 'Aquarium' THEN 1 END) aquarium_cnt,
         count(case when category_main = 'Zoo' THEN 1 END) zoo_cnt,
         count(case when category_main = 'Korean Restaurant' THEN 1 END) korean_restaurant_cnt,
-    from us_addresses__poi.cybersyn.point_of_interest_index poi
-    join us_addresses__poi.cybersyn.point_of_interest_addresses_relationships poi_add 
+    from SNOWFLAKE_PUBLIC_DATA_FREE.PUBLIC_DATA_FREE.POINT_OF_INTEREST_INDEX poi
+    join SNOWFLAKE_PUBLIC_DATA_FREE.PUBLIC_DATA_FREE.POINT_OF_INTEREST_ADDRESSES_RELATIONSHIPS poi_add 
         on poi_add.poi_id = poi.poi_id
-    join us_addresses__poi.cybersyn.us_addresses address 
+    join SNOWFLAKE_PUBLIC_DATA_FREE.PUBLIC_DATA_FREE.US_ADDRESSES address 
         on address.address_id = poi_add.address_id
     join major_us_cities city on city.geo_id = address.id_city
     where true
